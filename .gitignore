@@ -1,0 +1,17 @@
+RSLAB/dlib_face_recognition_resnet_model_v1.dat
+RSLAB/shape_predictor_68_face_landmarks.dat
+DisplayUI/__pycache__/shared.cpython-310.pyc
+CommandCenter/__pycache__/rosclient.cpython-310.pyc
+CommandCenter/__pycache__/utils.cpython-310.pyc
+DisplayUI/UI/__pycache__/Devtools.cpython-39.pyc
+DisplayUI/UI/__pycache__/Devtools.cpython-310.pyc
+DisplayUI/UI/__pycache__/LockScreen.cpython-39.pyc
+DisplayUI/UI/__pycache__/LockScreen.cpython-310.pyc
+DisplayUI/UI/__pycache__/MainScreen.cpython-39.pyc
+DisplayUI/UI/__pycache__/MainScreen.cpython-310.pyc
+DisplayUI/UI/__pycache__/ScanFace.cpython-39.pyc
+DisplayUI/UI/__pycache__/ScanFace.cpython-310.pyc
+DisplayUI/UI/__pycache__/SendDoc.cpython-39.pyc
+DisplayUI/UI/__pycache__/SendDoc.cpython-310.pyc
+DisplayUI/UI/__pycache__/WaitingUser.cpython-39.pyc
+DisplayUI/UI/__pycache__/WaitingUser.cpython-310.pyc

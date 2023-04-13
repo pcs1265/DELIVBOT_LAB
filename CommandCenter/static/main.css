@@ -1,0 +1,63 @@
+
+html{
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.title{
+    text-align: center;
+}
+
+.panel_container{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items:start;
+    justify-content:space-around;
+    text-align: center;
+}
+
+.panel{
+    height: fit-content;
+    width: 300px;
+    border: none;
+    border-radius: 10px;
+    padding: 1%;
+    margin: 3%;
+    box-shadow: 3px 3px 7px 2px gray;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.solid_table{
+    border-collapse: collapse;
+    margin: 3%;
+}
+
+#make_goal{
+    height: 50px;
+    background-color:rgb(30, 100, 230);
+    color:white;
+    border: 0;
+    border-radius: 5px;
+    margin: 3%;
+}
+
+#cancel_goal{
+    height: 50px;
+    background-color:rgb(200, 60, 40);
+    color:white;
+    border: 0;
+    border-radius: 5px;
+    
+    margin: 3%;
+}
+
+.cmd_vel_table_item{
+    height: 100px;
+    width: 100px;
+}
+.cmd_vel_button{
+    height: 100%;
+    width: 100%;
+}

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+</head>
+<body>
+    <h1 class="title">TEST PANEL</h1>
+
+    <div class="panel_container">
+        <div class="panel">
+            <h2>Current Status</h2>
+            <table class="solid_table" border="1">
+                <tr>
+                    <th colspan="2">
+                        Position
+                    </th>
+                </tr>
+                <tr>
+                    <th style="width: 20%;">
+                        X
+                    </th>
+                    <td id="curr_pos_x">
+                        N/A
+                    </td>
+                </tr>
+                <tr>
+                    <th  style="width: 20%;">
+                        Y
+                    </th>
+                    <td id="curr_pos_y">
+                        N/A
+                    </td>
+                </tr>
+            </table>
+            <table class="solid_table" border="1">
+                <tr>
+                    <th colspan="2">
+                        Orientation
+                    </th>
+                </tr>
+                <tr>
+                    <th style="width: 20%;">
+                        W
+                    </th>
+                    <td id="curr_ori_w">
+                        N/A
+                    </td>
+                </tr>
+                <tr>
+                    <th style="width: 20%;">
+                        Z
+                    </th>
+                    <td id="curr_ori_z">
+                        N/A
+                    </td>
+                </tr>
+            </table>
+            <table class="solid_table" border="1">
+                <tr>
+                    <th>
+                        Action Status Code
+                    </th>
+                </tr>
+                <tr>
+                    <td id="curr_action_status_code">
+                        N/A
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        Action Status Text
+                    </th>
+                </tr>
+                <tr>
+                    <td id="curr_action_status_text">
+                        N/A
+                    </td>
+                </tr>
+            </table>
+            <p>
+                <input type="checkbox" id="pos_update">
+                <label for="pos_update">Keep updated</label>
+            </p>
+        </div>
+        <div class="panel">
+            <h2>Make a Goal</h2>
+            <table class="solid_table" border="1">
+                <tr>
+                    <th style="width: 20%;">
+                        X
+                    </th>
+                    <td>
+                        <input id="input_pos_x" type="text">
+                    </td>
+                </tr>
+                <tr>
+                    <th style="width: 20%;">
+                        Y
+                    </th>
+                    <td>
+                        <input id="input_pos_y" type="text">
+                    </td>
+                </tr>
+            </table>
+            <table class="solid_table" border="1">
+                <tr>
+                    <th style="width: 20%;">
+                        W
+                    </th>
+                    <td>
+                        <input id="input_ori_w" type="text">
+                    </td>
+                </tr>
+                <tr>
+                    <th style="width: 20%;">
+                        Z
+                    </th>
+                    <td>
+                        <input id="input_ori_z" type="text">
+                    </td>
+                </tr>
+            </table>
+            <button id="make_goal">Make</button>
+            <button id="cancel_goal">Cancel</button>
+            <p id="goal_status">Goal has not set yet.</p>
+        </div>
+        <div class="panel">
+            <h2>cmd_vel</h2>
+            <table class="solid_table" border="1">
+                <tr>
+                    <th>
+                        Linear Velocity
+                    </th>
+                    <td id="curr_linear_vel">
+                        0.00
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        Angular Velocity
+                    </th>
+                    <td id="curr_angular_vel">
+                        0.00
+                    </td>
+                </tr>
+            </table>
+            <table>
+                <tr>
+                    <td class="cmd_vel_table_item">
+                    </td>
+                    <td class="cmd_vel_table_item">
+                        <button class="cmd_vel_button" id="cmd_linear_up_button">↑</button>
+                    </td>
+                    <td class="cmd_vel_table_item">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="cmd_vel_table_item">
+                        <button class="cmd_vel_button" id="cmd_angular_up_button">←</button>
+                    </td>
+                    <td class="cmd_vel_table_item">
+                        <button class="cmd_vel_button" id="cmd_stop_button">×</button>
+                    </td>
+                    <td class="cmd_vel_table_item">
+                        <button class="cmd_vel_button" id="cmd_angular_down_button">→</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="cmd_vel_table_item">
+                    </td>
+                    <td class="cmd_vel_table_item">
+                        <button class="cmd_vel_button" id="cmd_linear_down_button">↓</button>
+                    </td>
+                    <td class="cmd_vel_table_item">
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="panel">
+            <h2>AccessDB</h2>
+            <button id="checkDB">request CheckDB</button>
+            <button id="robotDone">request RobotDone</button>
+        </div>
+    </div>
+</body>
+<script src="{{ url_for('static', filename='main.js') }}">
+</script>
+</html>
