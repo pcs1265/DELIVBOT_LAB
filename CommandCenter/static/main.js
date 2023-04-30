@@ -97,7 +97,7 @@ var cmd_linear_velocity = 0;
 var cmd_angular_velocity = 0;
 
 function send_cmd_vel(){
-    var requestURL = window.location.href + 'cmd_vel';
+    var requestURL = window.location.href + 'cmd_vel/';
     var request = new XMLHttpRequest();
     request.open('POST', requestURL);
     request.setRequestHeader("Content-Type", "application/json");

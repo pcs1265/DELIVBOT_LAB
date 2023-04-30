@@ -295,10 +295,10 @@ def validate_face(frame, depth_scale, face):
 
     if( nose_depth >= eye_depth ):
         return False
-    if( eye_depth - nose_depth > 0.07 ):
+    if( eye_depth - nose_depth > 0.1 ):
         return False
-    if( ear_depth <= eye_depth ):
-        return False
+    # if( ear_depth <= eye_depth ):
+    #     return False
     if( mouth_depth <= nose_depth ):
         return False
     if( mouth_depth > chin_depth ):
@@ -312,7 +312,7 @@ def validate_face(frame, depth_scale, face):
     n = min( { nose_depth, eye_depth, ear_depth, mouth_depth, chin_depth } )
 
 
-    if( x - n > 0.40 ):
+    if( x - n > 0.20 ):
         return False
     if( x - n < 0.01 ):
         return False
@@ -320,6 +320,7 @@ def validate_face(frame, depth_scale, face):
     return True
 
 def main():
+    print(dlib.DLIB_USE_CUDA)
     # Create a context object. This object owns the handles to all connected realsense devices
     pipe = rs.pipeline()
 
@@ -353,7 +354,9 @@ def main():
     # Note that the license for the iBUG 300-W dataset excludes commercial use.
     # So you should contact Imperial College London to find out if it's OK for
     # you to use this model file in a commercial product.
+
     face_bbox_detector = dlib.get_frontal_face_detector()
+    #face_bbox_detector = dlib.cnn_face_detection_model_v1("mmod_human_face_detector.dat")
     face_landmark_annotator = dlib.shape_predictor("shape_predictor_68_face_landmarks.dat")
 
     # The 5-point landmarks model file can be used, instead. It's 10 times smaller and runs
@@ -377,6 +380,7 @@ def main():
     good_color = dlib.rgb_pixel( 0, 255, 0 )
 
     win = dlib.image_window()
+    
 
     while(not(win.is_closed())):
         data = pipe.wait_for_frames(); # Wait for next set of frames from the camera
@@ -392,6 +396,7 @@ def main():
         # Detect faces: find bounding boxes around all faces, then annotate each to find its landmarks
         face_bboxes = face_bbox_detector( image )
         faces = []
+
         for bbox in face_bboxes:
             faces.append( face_landmark_annotator( image, bbox ))
 

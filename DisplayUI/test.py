@@ -16,6 +16,9 @@ if __name__ == '__main__':
 
     
     shared.lock = LockScreen()
+    shared.cmd_thr.setLockScreen(shared.lock)
+    shared.cmd_thr.start()
+
     shared.stack.addWidget(shared.lock)
 
     shared.stack.setGeometry(0, 0, 1024, 600)

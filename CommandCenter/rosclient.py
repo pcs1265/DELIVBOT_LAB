@@ -56,7 +56,7 @@ def initialize():
 
     #cmd_vel 토픽을 발행하는 객체 정의
     global cmd_topic
-    cmd_topic = roslibpy.Topic(client, '/cmd_vel', 'geometry_msgs/Twist', throttle_rate=50)
+    cmd_topic = roslibpy.Topic(client, '/cmd_vel', 'geometry_msgs/Twist', throttle_rate=1)
     cmd_topic.advertise()
 
     #DB 연결 수립

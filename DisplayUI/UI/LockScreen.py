@@ -40,13 +40,12 @@ class LockScreen(QMainWindow):
     def mouseReleaseEvent(self, e):
         self.departure_timer.stop()
         self.delivery_notice.setText("")
-        requests.post("http://10.8.0.1:5000/op/userOccupation")
         self.main = Main(self.childClosed)
         shared.stack.addWidget(self.main)
         shared.stack.setCurrentWidget(self.main)
 
     def openWaitingUser(self):
-        self.wu = WaitingUser()
+        self.wu = WaitingUser(self.childClosed)
         shared.stack.addWidget(self.wu)
         shared.stack.setCurrentWidget(self.wu)
 
@@ -66,7 +65,7 @@ class LockScreen(QMainWindow):
         if(self.departure_timeout == 0):
             self.departure_timer.stop()
             self.delivery_notice.setText("")
-            requests.post("http://10.8.0.1:5000/op/robotDone")
+            requests.post("http://10.8.0.1:5000/op/makeGoal")
             return
         
         self.delivery_notice.setText(str(self.departure_timeout) + "초 후 목적지로 출발합니다...")

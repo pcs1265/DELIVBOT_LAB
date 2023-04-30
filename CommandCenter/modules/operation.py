@@ -39,6 +39,7 @@ def waitForCompleteAction(goal):
 #cmd_code Rules
 #0 : 목적지 도착
 #1 : 출발 대기 시작
+#2 : 이동중
 
 
 def getCandFromDB():
@@ -139,9 +140,14 @@ def makeGoalFromDB():
 @operationAPI.route('/checkDB', methods=["POST"])
 def checkDB():
     if(rosclient.cmd_center['status'][0] == status_waiting_for_request[0]):
-        makeGoalFromDB()
+        global robot_cmd
+        robot_cmd = (True, 1)
     return ""
 
+@operationAPI.route('/makeGoal', methods=["POST"])
+def makeGoal():
+    makeGoalFromDB()
+    return ""
 
 @operationAPI.route('/userOccupation', methods=["POST"])
 def robotUsing():
@@ -150,11 +156,8 @@ def robotUsing():
 
 @operationAPI.route('/userOccupation', methods=["DELETE"])
 def robotDone():
-
     if(rosclient.cmd_center['status'][0] == status_waiting_for_robot_complete[0]):
         rosclient.cmd_center['status'] = status_waiting_for_request
-        print("사용자 작업 완료")
-        makeGoalFromDB()
     return ""
 
 @operationAPI.route('/pending', methods=["GET"])
@@ -164,9 +167,9 @@ def isPending():
     else:
         return {"isPending" : False}
 
-@operationAPI.route('/pollstate', methods=["GET"])
-def pollState():
-    timeout = 10  # 10초의 타임아웃 설정
+@operationAPI.route('/pollCommand', methods=["GET"])
+def pollCommand():
+    timeout = 60  # 60초의 타임아웃 설정
     start_time = time.time()  # 현재 시간 기록
     global robot_cmd
     
