@@ -9,7 +9,7 @@ import roslibpy.actionlib
 #   y
 #orientation
 #   w
-#   w
+#   z
 def recv_pos(received_data):
     global currrent_pose
     currrent_pose = received_data['pose']['pose']

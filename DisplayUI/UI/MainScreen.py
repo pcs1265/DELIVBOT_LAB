@@ -5,10 +5,11 @@ from PyQt5.uic import loadUi
 
 import shared
 import requests
+import json
 
 from UI.SendDoc import SendDoc
-from UI.ScanFace import ScanFace
 from UI.Devtools import DevTools
+from UI.AuthMethods import AuthMethods
 
 class Main(QMainWindow):
 
@@ -22,44 +23,32 @@ class Main(QMainWindow):
         self.closeSignal = signal
 
     def initUI(self):
-        self.timer = QTimer()
-        self.timer.setInterval(1000)
-        self.timer.timeout.connect(self.countSecond)
-        self.startCount()
-
+        shared.noInput.tickSecond.connect(self.countSecond)
+        shared.noInput.elapsed.connect(self.close)
+        shared.noInput.startTimer()
+        self.countSecond()
+        
         self.dev_button.clicked.connect(self.openDevTools)
         self.send_doc_button.clicked.connect(self.openSendDoc)
-        self.recv_doc_button.clicked.connect(self.openRecvDoc)
+        self.recv_doc_button.clicked.connect(self.openAuthMethods)
         self.back_button.clicked.connect(self.close)
         requests.post("http://10.8.0.1:5000/op/userOccupation")
 
-    def startCount(self):
-        self.timeout = 10
-        self.timer.start()
-
     def countSecond(self):
-        self.timeout -= 1
-        if(self.timeout == 0):
-            self.close()
-        min = str(self.timeout // 60).zfill(2)
-        sec = str(self.timeout % 60).zfill(2)
+        timeLeft = shared.noInput.timeLeft
+        min = str(timeLeft // 60).zfill(2)
+        sec = str(timeLeft % 60).zfill(2)
         self.timeout_timer.setText("잔여 시간 : " + min + "분 " + sec + "초")
-
-    def stopCount(self):
-        self.timer.stop()
-        self.timeout_timer.setText("")
     
     def openSendDoc(self):
-        self.stopCount()
         self.sd = SendDoc()
         shared.stack.addWidget(self.sd)
         shared.stack.setCurrentWidget(self.sd)
         
-    def openRecvDoc(self):
-        self.stopCount()
-        self.sf = ScanFace()
-        shared.stack.addWidget(self.sf)
-        shared.stack.setCurrentWidget(self.sf)
+    def openAuthMethods(self):
+        self.am = AuthMethods()
+        shared.stack.addWidget(self.am)
+        shared.stack.setCurrentWidget(self.am)
 
     def openDevTools(self):
         self.dev = DevTools()
@@ -67,6 +56,7 @@ class Main(QMainWindow):
         shared.stack.setCurrentWidget(self.dev)
 
     def close(self):
+        shared.noInput.stopTimer()
         requests.delete("http://10.8.0.1:5000/op/userOccupation")
         self.closeSignal.emit()
         shared.stack.removeWidget(self)

@@ -7,21 +7,24 @@ import requests
 
 import shared
 from UI.MainScreen import Main
-from UI.WaitingUser import WaitingUser
+from UI.Navigating import Navigating
 
 class LockScreen(QMainWindow):
 
-    reached = pyqtSignal()
-    departure = pyqtSignal()
     childClosed = pyqtSignal()
 
     def __init__(self):
         super().__init__()
         loadUi("UI/LockScreen.ui", self)
+        self.toReturn = False
         self.initUI()
 
+        self.wu = Main(self.childClosed)
+        self.na = Navigating()
+
     def initUI(self):
-        self.reached.connect(self.openWaitingUser)
+        shared.cmd_thr.reached.connect(self.openWaitingUser)
+        shared.cmd_thr.navigating.connect(self.openNavigating)
 
         self.curr_time_timer = QTimer()
         self.curr_time_timer.setInterval(1000)
@@ -30,10 +33,12 @@ class LockScreen(QMainWindow):
         self.showCurrTime()
 
         self.childClosed.connect(self.checkPending)
-        self.departure.connect(self.checkPending)
+        shared.cmd_thr.departure.connect(self.checkPending)
         self.departure_timer = QTimer()
         self.departure_timer.setInterval(1000)
         self.departure_timer.timeout.connect(self.countDepartureTimer)
+
+        # shared.cmd_thr.openBox.connect(self.openBoxDialogue)
         
         return
     
@@ -45,9 +50,18 @@ class LockScreen(QMainWindow):
         shared.stack.setCurrentWidget(self.main)
 
     def openWaitingUser(self):
-        self.wu = WaitingUser(self.childClosed)
         shared.stack.addWidget(self.wu)
         shared.stack.setCurrentWidget(self.wu)
+
+    def openNavigating(self):
+        shared.stack.addWidget(self.na)
+        shared.stack.setCurrentWidget(self.na)
+
+    # @QtCore.pyqtSlot(int)
+    # def openBoxDialogue(self, msg):
+    #     self.bd = BoxDialogue(msg)
+    #     shared.stack.addWidget(self.bd)
+    #     shared.stack.setCurrentWidget(self.bd)
 
     def showCurrTime(self):
         time = QTime.currentTime()
@@ -57,15 +71,24 @@ class LockScreen(QMainWindow):
         r = requests.get("http://10.8.0.1:5000/op/pending")
         data = r.json()
         if (data['isPending']):
+            self.toReturn = False
             self.departure_timeout = 10
             self.departure_timer.start()
+        elif(not data['inDefaultPosition']):
+            self.toReturn = True
+            self.departure_timeout = 10
+            self.departure_timer.start()
+
 
     def countDepartureTimer(self):
         self.departure_timeout -= 1
         if(self.departure_timeout == 0):
             self.departure_timer.stop()
             self.delivery_notice.setText("")
-            requests.post("http://10.8.0.1:5000/op/makeGoal")
+            if self.toReturn:
+                requests.post("http://10.8.0.1:5000/op/returnDefaultPosition")
+            else:
+                requests.post("http://10.8.0.1:5000/op/makeGoal")
             return
         
-        self.delivery_notice.setText(str(self.departure_timeout) + "초 후 목적지로 출발합니다...")
+        self.delivery_notice.setText(str(self.departure_timeout) + "초 후 로봇이 출발합니다...")

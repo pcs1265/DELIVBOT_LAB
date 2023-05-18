@@ -436,19 +436,6 @@ color: rgb(255, 255, 255);</string>
    <bool>false</bool>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QPushButton" name="dev_button">
-    <property name="geometry">
-     <rect>
-      <x>933</x>
-      <y>551</y>
-      <width>89</width>
-      <height>25</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Dev Tools</string>
-    </property>
-   </widget>
    <widget class="QPushButton" name="recv_doc_button">
     <property name="geometry">
      <rect>
@@ -592,7 +579,7 @@ color: rgb(255, 255, 255);</string>
     <property name="geometry">
      <rect>
       <x>287</x>
-      <y>510</y>
+      <y>550</y>
       <width>450</width>
       <height>50</height>
      </rect>
@@ -646,8 +633,65 @@ color: rgb(255, 255, 255);</string>
      <bool>false</bool>
     </property>
    </widget>
+   <widget class="QLabel" name="status_text">
+    <property name="geometry">
+     <rect>
+      <x>774</x>
+      <y>580</y>
+      <width>250</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>10</pointsize>
+     </font>
+    </property>
+    <property name="layoutDirection">
+     <enum>Qt::LeftToRight</enum>
+    </property>
+    <property name="text">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+    <property name="textInteractionFlags">
+     <set>Qt::NoTextInteraction</set>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="dev_button">
+    <property name="geometry">
+     <rect>
+      <x>934</x>
+      <y>550</y>
+      <width>90</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="mouseTracking">
+     <bool>false</bool>
+    </property>
+    <property name="layoutDirection">
+     <enum>Qt::LeftToRight</enum>
+    </property>
+    <property name="text">
+     <string>DevTools</string>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>100</width>
+      <height>100</height>
+     </size>
+    </property>
+    <property name="default">
+     <bool>false</bool>
+    </property>
+    <property name="flat">
+     <bool>false</bool>
+    </property>
+   </widget>
   </widget>
-  <widget class="QStatusBar" name="statusbar"/>
  </widget>
  <resources/>
  <connections/>

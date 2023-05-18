@@ -436,13 +436,13 @@ color: rgb(255, 255, 255);</string>
    <bool>false</bool>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QLabel" name="title">
+   <widget class="QLabel" name="doc_num">
     <property name="geometry">
      <rect>
       <x>137</x>
-      <y>90</y>
+      <y>100</y>
       <width>750</width>
-      <height>200</height>
+      <height>80</height>
      </rect>
     </property>
     <property name="font">
@@ -454,7 +454,7 @@ color: rgb(255, 255, 255);</string>
      <enum>Qt::LeftToRight</enum>
     </property>
     <property name="text">
-     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;~~~님의 서류는 2개 있습니다.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;1,2번 물품함을 확인해주세요.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     <string>~~~님의 서류는 2개 있습니다.</string>
     </property>
     <property name="alignment">
      <set>Qt::AlignCenter</set>
@@ -484,7 +484,8 @@ color: rgb(255, 255, 255);</string>
      <enum>Qt::LeftToRight</enum>
     </property>
     <property name="text">
-     <string>수령 완료</string>
+     <string>수령 완료
+(수령 후 물품함을 닫아주세요)</string>
     </property>
     <property name="iconSize">
      <size>
@@ -497,6 +498,33 @@ color: rgb(255, 255, 255);</string>
     </property>
     <property name="flat">
      <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="box_num">
+    <property name="geometry">
+     <rect>
+      <x>137</x>
+      <y>210</y>
+      <width>750</width>
+      <height>80</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>25</pointsize>
+     </font>
+    </property>
+    <property name="layoutDirection">
+     <enum>Qt::LeftToRight</enum>
+    </property>
+    <property name="text">
+     <string>1,2번 물품함을 확인해주세요.</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+    <property name="textInteractionFlags">
+     <set>Qt::NoTextInteraction</set>
     </property>
    </widget>
   </widget>

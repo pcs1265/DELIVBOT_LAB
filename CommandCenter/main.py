@@ -9,7 +9,6 @@ from modules.cmd_vel import cmd_velAPI
 from modules.operation import operationAPI
 from modules.qrcode import QRCodeAPI
 
-
 app = Flask(__name__)
 
 #블루프린트 로드

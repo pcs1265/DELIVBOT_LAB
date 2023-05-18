@@ -16,12 +16,13 @@ if __name__ == '__main__':
 
     
     shared.lock = LockScreen()
-    shared.cmd_thr.setLockScreen(shared.lock)
     shared.cmd_thr.start()
 
     shared.stack.addWidget(shared.lock)
 
-    shared.stack.setGeometry(0, 0, 1024, 600)
+    monitor = QDesktopWidget().screenGeometry(1)
+
+    shared.stack.setGeometry(monitor.left(), monitor.top(), 1024, 600)
     shared.stack.setMaximumHeight(600)
     shared.stack.setMaximumWidth(1024)
     shared.stack.showFullScreen()

@@ -161,10 +161,19 @@ checkDB_button.addEventListener('click', () => {
     request.send();
 });
 
-const robotDone_button = document.querySelector('#robotDone');
-robotDone_button.addEventListener('click', () => {
-    var requestURL = window.location.href + 'op/robotDone';
+const postUserOccu_button = document.querySelector('#POSTuserOccu');
+postUserOccu_button.addEventListener('click', () => {
+    var requestURL = window.location.href + 'op/userOccupation';
     var request = new XMLHttpRequest();
     request.open('POST', requestURL);
     request.send();
 });
+
+const deleteUserOccu_button = document.querySelector('#DELETEuserOccu');
+deleteUserOccu_button.addEventListener('click', () => {
+    var requestURL = window.location.href + 'op/userOccupation';
+    var request = new XMLHttpRequest();
+    request.open('DELETE', requestURL);
+    request.send();
+});
+
